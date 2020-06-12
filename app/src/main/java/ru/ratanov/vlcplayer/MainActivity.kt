@@ -93,6 +93,11 @@ class MainActivity : AppCompatActivity() {
             .subscribe { position ->
                 seekLabel.text = TimeUtils.formatTime(position)
             }
+
+        controlsView.playingSubject
+            .subscribe { isPlaying ->
+                if (isPlaying) mediaPlayer.pause() else mediaPlayer.play()
+            }
     }
 
 }
