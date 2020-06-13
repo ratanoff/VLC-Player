@@ -12,7 +12,7 @@ import kotlinx.android.synthetic.main.view_controls.view.*
 import ru.ratanov.vlcplayer.R
 import ru.ratanov.vlcplayer.utils.TimeUtils
 
-class ControlsView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
+class ControlsPanel(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var isPlaying = false
 

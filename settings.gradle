@@ -1,2 +1,3 @@
+include ':vlcplayer'
 include ':app'
 rootProject.name = "VLC Player"
