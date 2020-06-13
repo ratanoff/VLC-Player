@@ -8,11 +8,11 @@ import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import io.reactivex.subjects.PublishSubject
-import kotlinx.android.synthetic.main.view_controls.view.*
+import kotlinx.android.synthetic.main.view_control_panel.view.*
 import ru.ratanov.vlcplayer.R
 import ru.ratanov.vlcplayer.utils.TimeUtils
 
-class ControlsPanel(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
+class ControlPanel(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
     private var isPlaying = false
 
@@ -22,7 +22,7 @@ class ControlsPanel(context: Context, attrs: AttributeSet) : ConstraintLayout(co
     val playingSubject = PublishSubject.create<Boolean>()
 
     init {
-        LayoutInflater.from(context).inflate(R.layout.view_controls, this, true)
+        LayoutInflater.from(context).inflate(R.layout.view_control_panel, this, true)
         initSeekBar()
         initPlayPauseButton()
     }

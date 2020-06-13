@@ -3,8 +3,10 @@ package ru.ratanov.vlcplayer.view
 import android.annotation.SuppressLint
 import android.content.Context
 import android.net.Uri
+import android.os.Handler
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import io.reactivex.Observable
@@ -88,6 +90,17 @@ class VlcPlayerView(context: Context, attrs: AttributeSet) : ConstraintLayout(co
             .subscribe { isPlaying ->
                 if (isPlaying) mediaPlayer.pause() else mediaPlayer.play()
             }
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+        if (event.action == MotionEvent.ACTION_DOWN) {
+            val controlPanelHeight = resources.getDimension(R.dimen.control_panel_height)
+            controlPanel.animate().y((height - controlPanelHeight))
+            Handler().postDelayed({
+                controlPanel.animate().y(height.toFloat())
+            }, 4000)
+        }
+        return super.onTouchEvent(event)
     }
 
 }
