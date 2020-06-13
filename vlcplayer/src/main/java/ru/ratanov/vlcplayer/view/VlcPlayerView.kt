@@ -79,6 +79,7 @@ class VlcPlayerView(context: Context, attrs: AttributeSet) : ConstraintLayout(co
                 isSeeking = false
                 seekLabel.visibility = View.INVISIBLE
                 mediaPlayer.time = position
+                hideControlPanel()
             }
 
         controlPanel.progressChangedSubject
@@ -97,10 +98,14 @@ class VlcPlayerView(context: Context, attrs: AttributeSet) : ConstraintLayout(co
             val controlPanelHeight = resources.getDimension(R.dimen.control_panel_height)
             controlPanel.animate().y((height - controlPanelHeight))
             Handler().postDelayed({
-                controlPanel.animate().y(height.toFloat())
+                if (!isSeeking) hideControlPanel()
             }, 4000)
         }
         return super.onTouchEvent(event)
+    }
+
+    private fun hideControlPanel() {
+        controlPanel.animate().y(height.toFloat())
     }
 
 }
