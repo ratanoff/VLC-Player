@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+import com.android.build.OutputFile
 
 android {
     compileSdkVersion 29
@@ -21,6 +22,26 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            universalApk true
+        }
+    }
+
+
+    applicationVariants.all { variant ->
+        def appName = "Kinoman";
+        variant.outputs.each { output ->
+            def abi = output.getFilter(OutputFile.ABI) ?: "all-abi"
+            def version = variant.versionName
+            def finalName = appName + "-" + abi + "-" + version + ".apk"
+            output.outputFileName = finalName
         }
     }
 }
